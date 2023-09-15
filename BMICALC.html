@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Detailed BMI Calculator</title>
+	<style>
+		* {
+			font-family: 'Courier New', Courier, sans-serif;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body {
+			background-color: beige;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-height: 100vh;
+		}
+		h1 {
+			text-align: center;
+			margin-bottom: 20px;
+			color: #333;
+		}
+		p {
+			margin-bottom: 20px;
+			color: #666;
+		}
+		fieldset {
+			width: 400px;
+			background-color: powderblue;
+			padding: 20px;
+			border-radius: 10px;
+		}
+		label {
+			display: block;
+			margin-bottom: 8px;
+			color: #333;
+		}
+		input[type="text"] {
+			width: 100%;
+			padding: 8px;
+			margin-bottom: 16px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		input[type="button"] {
+			padding: 8px 16px;
+			margin: 4px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			background-color: #2d87f0;
+			color: #fff;
+		}
+		input[type="button"]:hover {
+			background-color: #1a60c4;
+		}
+		textarea {
+			width: 100%;
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Calculate your BMI</h1>
+	<p>This small calculator shows your BMI index</p>
+	<fieldset>
+		<form id="bmiForm">
+			<label for="weight">Your Weight (kg)</label>
+			<input type="text" id="weight" name="weight">
+			<label for="height">Your Height (cm)</label>
+			<input type="text" id="height" name="height">
+			<input type="button" value="Submit" onclick="calcbmi()"> 
+			<input type="button" value="Reset" onclick="ClearArea()">
+			<textarea name="result" id="result" rows="10" cols="30" readonly></textarea>
+		</form>
+	</fieldset>
+	<script>
+	
+	function calcbmi() {
+		
+			var weight=Number(document.getElementById("weight").value);
+			var height=Number(document.getElementById("height").value);
+			var bmi=((weight/(height*height))*10000).toFixed(2);
+			var valiate_result="";
+		
+			if (weight!=0 && height!=0) {
+			
+				if (bmi<18.5) {
+				
+				document.getElementById("result").style.color="blue";
+				document.getElementById("result").innerHTML="Your BMI INDEX :"+bmi+"\nUNDERWEIGHT";
+				}
+				else if (bmi>18.5 && bmi<24.9) {
+				document.getElementById("result").style.color="green";
+
+				document.getElementById("result").innerHTML="Your BMI INDEX :"+bmi+"\nNORMAL";
+				}
+				else if (bmi>25.0	 && bmi<29.9) {
+				document.getElementById("result").style.color="brown";
+				document.getElementById("result").innerHTML="Your BMI INDEX :"+bmi+"\nOVERWEIGHT";
+				}
+				else if (bmi>30 && bmi<34.9) {
+				document.getElementById("result").style.color="darkbrown";
+				document.getElementById("result").innerHTML="Your BMI INDEX :"+bmi+"\nOBESE";
+				}
+				else {
+				document.getElementById("result").innerHTML="Your BMI INDEX :"+bmi+"\nEXTREMEMLY OBESE";
+				}
+				
+			}
+			else {
+			window.alert("invalid value try again");
+			}
+			
+		}
+		
+		function ClearArea() {
+		document.getElementById("bmiForm").reset();
+		document.getElementById("result").innerHTML="";
+		
+		}
+		
+	</script>
+</body>
+</html>
